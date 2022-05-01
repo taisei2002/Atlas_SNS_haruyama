@@ -27,8 +27,6 @@
                 <div id="">
                     <p>〇〇さん<a href="/profile" ><img src="images/icon1.png"></p>
                 <div>
-  <ul id="accordion" class="accordion">
-      <div class="link"><i class="fa fa-paint-brush"></i>^<i class="fa fa-chevron-down"></i></div>
 
                 <ul class="submenu">
                     <li><a href="/top">HOME</a></li>
@@ -49,20 +47,19 @@
                 <p>フォロー数</p>
                 <p>〇〇名</p>
                 </div>
-                <p class="btn"><a href="">フォローリスト</a></p>
+                <p class="btn"><a href="followList">フォローリスト</a></p>
                 <div>
                 <p>フォロワー数</p>
                 <p>〇〇名</p>
                 </div>
-                <p class="btn"><a href="">フォロワーリスト</a></p>
+                <p class="btn"><a href="followerList">フォロワーリスト</a></p>
             </div>
-            <p class="btn"><a href="">ユーザー検索</a></p>
+            <p class="btn"><a href="UserSearch">ユーザー検索</a></p>
         </div>
     </div>
     <footer>
     </footer>
-    <script src="JavaScriptファイルのURL"></script>
-    <script src="JavaScriptファイルのURL"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
-
