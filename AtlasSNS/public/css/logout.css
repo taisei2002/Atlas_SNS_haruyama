@@ -1,35 +1,104 @@
 @charset "UTF-8";
 
-html{
+html {
     height: 100%;
 }
 
-body{
+body {
     height: 100%;
-    background: linear-gradient(#186AC9,#2b95ff,#55aaff, #ffff00);
+    background: linear-gradient(#186AC9, #2b95ff, #55aaff, #ffff00);
+}
+
+h2 {
+    margin-top: 20px;
+    font-size: 18px;
+    text-align: center;
+}
+
+/*ログイン画面*/
+
+.login{
+    display: flex;
+
+}
+.Atlas-logo{
+
+/* ボックス配置指定 */
+position: absolute;
+top: 0;
+right: 0;
+bottom: 0;
+left: 0;
+margin: auto;
+/* 上下左右中央のときのみ */
+width: 175px;
+height: 500px;
+
+
+}
+/*　サイズ　*/
+
+.sub-title{
+position: absolute;
+top: 0;
+right: 0;
+bottom: 0;
+left: 0;
+margin: auto;
+width: 200px;
+height: 350px;
+
+}
+.letter-form {
+    min-height: 10em;
+    display: table-cell;
+    vertical-align: middle
 }
 
 div.background_box {
     /* テキストを配置するための子要素 */
     width: 250px;
-    height: 300px;
+    height: 450px;
     background: rgba(0, 0, 0, 0.2);
     /* #4d0000⇒rgba(77,0,0,0.7)に変更 */
     position: absolute;
-    top: 50%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-    border-bottom-left-radius: 20px;
+    border-radius: 10px;
+}
+
+.letter {
+    display:block;
+    width: 50px;
+    color: #fff;
+    text-align: left;
+    margin: 0;
+    margin-bottom: 20px;
 
 }
 
-.create-from{
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-    border-bottom-left-radius: 20px;
+.input {
 
+    width: 205px;
+    margin: 0 center;/*中央寄せ*/
+    padding: 7px 0;
+    border-radius:5px;
+    margin-top: 25px;
+    margin-left: 20px;
+}
+
+.register-button {
+    color: #fff;
+    background-color: #DC143C;
+    padding: 5px 20px 5px 20px;
+    font-size: 15px;
+    border-radius: 9px;
+    margin-left: 110px;
+
+}
+
+.register-button:hover {
+    color: #fff;
+    background: #f56500;
 }

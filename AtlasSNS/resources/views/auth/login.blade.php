@@ -1,8 +1,11 @@
+
 @extends('layouts.logout')
 
 @section('content')
 
 {!! Form::open() !!}
+
+<div class="background_box">
 
 <p>AtlasSNSへようこそ</p>
 
@@ -15,6 +18,9 @@
 
 <p><a href="/register">新規ユーザーの方はこちら</a></p>
 
+</div>
+
 {!! Form::close() !!}
 
 @endsection
+
