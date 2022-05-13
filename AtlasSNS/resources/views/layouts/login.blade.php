@@ -20,20 +20,28 @@
     <!--OGPタグ/twitterカード-->
 </head>
 <body>
+
     <header>
         <div id = "head">
-        <h1 class= "users"><a href="/top" ><img src="images/atlas.png"></a></h1>
-            <div id="">
-                <div id="">
-                    <p>〇〇さん<a href="/profile" ><img src="images/icon1.png"></p>
-                <div>
+            <p class="Atlas-images">
+        <h1 class= "users"><a href="/top" ><img src="images/atlas.png" width="80" height="30"></a></h1>
 
-                <ul class="submenu">
-                    <li><a href="/top">HOME</a></li>
-                    <li><a href="/profile">プロフィール</a></li>
-                    <li><a href="/logout">ログアウト</a></li>
-                </ul>
-            </div>
+                <div id="user-icon">
+                    <p>ユーザーネーム<a href="/profile" ><img src="images/icon1.png"></p> <a ></a>
+
+     <div class="accordion-menu">
+                <ul>
+	<li class="block">
+		<input type="checkbox" name="item" id="item1" />
+		<label for="item1"><i aria-hidden="true" class="icon-users"></i> > </label>
+		<ul class="options">
+			<li><a href="/top"><i aria-hidden="true" class="icon-search"></i> HOME</a></li>
+			<li><a href="/profile"><i aria-hidden="true" class="icon-point-right"></i> プロフィール編集</a></li>
+			<li><a href="/logout"><i aria-hidden="true" class="icon-fire"></i>ログアウト</a></li>
+		</ul>
+	</li>
+            </div></p>
+  </div>
         </div>
     </header>
     <div id="row">
@@ -47,16 +55,19 @@
                 <p>フォロー数</p>
                 <p>〇〇名</p>
                 </div>
-                <p class="btn"><a href="followList">フォローリスト</a></p>
+                <p class="btn"><a href="/follow-list">フォローリスト</a></p>
                 <div>
                 <p>フォロワー数</p>
                 <p>〇〇名</p>
                 </div>
-                <p class="btn"><a href="followerList">フォロワーリスト</a></p>
+                <p class="btn"><a href="/follower-list">フォロワーリスト</a></p>
             </div>
-            <p class="btn"><a href="UserSearch">ユーザー検索</a></p>
+            <p class="btn"><a href="/search">ユーザー検索</a></p>
         </div>
     </div>
+  </div>
+</div>
+
     <footer>
     </footer>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

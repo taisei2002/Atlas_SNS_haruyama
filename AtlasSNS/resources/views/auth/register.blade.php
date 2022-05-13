@@ -5,7 +5,7 @@
 @section('content')
 
 {!! Form::open() !!}
-<div class="background_box">
+<div class="background_box-register">
 <h2>新規ユーザー登録</h2>
 
 {{ Form::label('user name') }}
@@ -23,7 +23,7 @@
 
 {{ Form::submit('REGISTER',['class'=>'register-button']) }}
 
-<p><a href="/login">ログイン画面へ戻る</a></p>
+<p><a class="login" href="/login">ログイン画面へ戻る</a></p>
 
 {!! Form::close() !!}
 </div>
