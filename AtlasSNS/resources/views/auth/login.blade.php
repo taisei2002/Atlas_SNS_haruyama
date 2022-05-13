@@ -1,11 +1,11 @@
 
 @extends('layouts.logout')
-
+<div class='letter'>
 @section('content')
 
 {!! Form::open() !!}
 
-<div class="background_box">
+<div class="background_box-login">
 
 <p>AtlasSNSへようこそ</p>
 
@@ -14,13 +14,12 @@
 {{ Form::label('password') }}
 {{ Form::password('password',['class' => 'input']) }}
 
-{{ Form::submit('ログイン') }}
+{{ Form::submit('ログイン',['class'=>'login-button'])  }}
 
-<p><a href="/register">新規ユーザーの方はこちら</a></p>
-
+<p><a class="register" href="/register">新規ユーザーの方はこちら</a></p>
+</div>
 </div>
 
 {!! Form::close() !!}
 
 @endsection
-
