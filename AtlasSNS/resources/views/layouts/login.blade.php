@@ -22,10 +22,10 @@
 <body>
     <header>
         <div id = "head">
-        <h1 class= "users"><a href="/top" ><img src="images/atlas.png"></a></h1>
+        <h1 class= "users"><a href="/top" ><img src="images/atlas.png"widht="0" height="50"></a></h1>
             <div id="">
-                <div id="">
-                    <p>〇〇さん<a href="/profile" ><img src="images/icon1.png"></p>
+                <div id="User-icon">
+                    <p>〇〇さん<a href="/profile" ><img src="images/icon1.png" widht="0" height="50"></p>
                 <div>
 <a></a>
 <button type="button" class="menu-btn">
