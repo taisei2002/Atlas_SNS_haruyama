@@ -68,6 +68,19 @@ div.background_box {
     border-radius: 10px;
 }
 
+.background_box-login {
+    /* テキストを配置するための子要素 */
+    width: 250px;
+    height: 450px;
+    background: rgba(0, 0, 0, 0.2);
+    /* #4d0000⇒rgba(77,0,0,0.7)に変更 */
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+}
+
 .letter {
     display:block;
     width: 50px;
