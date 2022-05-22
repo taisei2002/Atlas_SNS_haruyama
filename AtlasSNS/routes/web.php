@@ -30,7 +30,8 @@ Route::get('/added', 'Auth\RegisterController@added');
 Route::post('/added', 'Auth\RegisterController@added');
 
 //ログイン中のページ
-Route::get('/top','PostsController@index');
+Route::get('/top', 'PostsController@index');
+Route::post('/tweet','TimelineController@postTweet');
 
 Route::get('/home','PostsController@index');
 
@@ -40,3 +41,10 @@ Route::get('/search','UsersController@search');
 
 Route::get('/follow-list','FollowsController@followList');
 Route::get('/follower-list','FollowsController@followerList');
+
+Route::get('/logout', 'LoginController@__construct');
+
+Route::post('/post','PostsController@postTweet');
+
+//Route::get('post/{id}/delete', 'PostsController@delete');
+//Route::get('post/{id}/update-form', 'PostsController@updateForm');
