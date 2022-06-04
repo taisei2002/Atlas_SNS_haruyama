@@ -26,4 +26,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+      public function user() {
+        //1対多の「１」側なので単数系
+    return $this->belongsTo('App\User');
+    }
 }
