@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'mail', 'password',
+        'id','username', 'mail', 'password',
     ];
 
     /**
@@ -27,8 +27,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-      public function user() {
+      public function users() {
         //1対多の「１」側なので単数系
-    return $this->belongsTo('App\User');
+    return $this->belongsTo('App\Post');
     }
 }
