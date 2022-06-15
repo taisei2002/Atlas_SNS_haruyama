@@ -3,24 +3,37 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Post;
+use App\User;
+use Auth;
+use Validator;
 
 class PostsController extends Controller
 {
-    //
-    public function index(){
-        return view('posts.index');
 
-        $list = \DB::table('posts')->get();
-        return view('post.index')->with('posts', $posts);
+public function index()
+  {
+     $posts = Post::get();
+
+      return view('posts.index',[
+    'posts'=> $posts
+  ]);
 
     }
 
-
-
-    public function postTweet(Request $request)
+    public function create(Request $request)
     {
+
         $post = $request->input('newPost');
-        \DB::table('posts')->insert([ 'tweet' => $tweet ]);
-        return redirect('posts.index');
+        $user_id = Auth::id();//ログインユーザー認証
+
+        \DB::table('posts')->insert([
+        'post' => $post,
+        'user_id' => $user_id
+    ]);
+
+         return redirect('/top');
+
     }
+
 }
