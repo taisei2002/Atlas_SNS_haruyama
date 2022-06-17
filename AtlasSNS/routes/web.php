@@ -30,21 +30,21 @@ Route::get('/added', 'Auth\RegisterController@added');
 Route::post('/added', 'Auth\RegisterController@added');
 
 //ログイン中のページ
-Route::get('/top', 'PostsController@index');
-Route::post('/tweet','TimelineController@postTweet');
-
-Route::get('/home','PostsController@index');
-
+//トップページ
+Route::get('/top', 'UsersController@index');
+Route::get('/home', 'UsersController@index');
+//プロフィール画面
 Route::get('/profile','UsersController@profile');
-
+//ユーザー検索
 Route::get('/search','UsersController@search');
-
+//フォロー・フォロワー機能実装
 Route::get('/follow-list','FollowsController@followList');
 Route::get('/follower-list','FollowsController@followerList');
-
-Route::get('/logout', 'LoginController@__construct');
-
-Route::post('/post','PostsController@postTweet');
-
-//Route::get('post/{id}/delete', 'PostsController@delete');
-//Route::get('post/{id}/update-form', 'PostsController@updateForm');
+//ログアウト機能
+Route::get('/logout',['uses' => 'UsersController@getLogout','as' =>'user.logout']);
+//クリエイト機能
+Route::post('/post','PostsController@create');
+//デリート機能
+Route::get('/post/{id}/delete','PostsController@delete');
+//編集機能
+Route::get('/post/update/{id}','PostsController@update');
