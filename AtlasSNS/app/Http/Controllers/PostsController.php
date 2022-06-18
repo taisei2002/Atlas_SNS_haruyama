@@ -46,13 +46,17 @@ public function delete($id)
 }
 
 //更新機能
-public function update($id)
+public function update(Request $request)
 {
- $user_id = Auth::id();
- $post =\DB::table('posts')
- ->where('id',$id)
- ->first();
 
+ $id = $request->input('id');
+ $up_post = $request->input('upPost');
+ $user_id = Auth::id();
+ \DB::table('posts')
+ ->where('id',$id)
+ ->update(
+ ['post' => $up_post]
+   );
  return redirect('/top');
 
     }
