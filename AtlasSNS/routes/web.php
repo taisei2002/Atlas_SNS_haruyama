@@ -47,4 +47,4 @@ Route::post('/post','PostsController@create');
 //デリート機能
 Route::get('/post/{id}/delete','PostsController@delete');
 //編集機能
-Route::get('/post/update/{id}','PostsController@update');
+Route::post('/post/update/{id}','PostsController@update');
