@@ -12,7 +12,7 @@
   </div>
   <!--投稿ボタン-->
         <button type="submit" class="btn-post"><img src="images/post.png"width="100" height="100"></button><br><br>
-     {!! Form::close() !!}
+
          @foreach ($list as $list)
       <p> <td>{{ $list->id }}</td><br>{{ $list->post }}{{ $list->created_at }}<br></p>
         <!-- 投稿の編集ボタン -->
@@ -24,15 +24,18 @@
 
    <!-- モーダルの中身 -->
  <div class="modal js-modal">
+
       {!! Form::open(['url' => '/post/update/{$list->id}']) !!}
         <div class="modal__bg js-modal-close"></div>
         <div class="modal__content">
-              {!! Form::hidden('id', $list->id) !!}
+
+        {!! Form::hidden('id', $list->id) !!}
             {!! Form::input('text', 'upPost', $list->post, ['required', 'class' => 'form-control']) !!}
-           <form action="{{ url('post/update/') }}/{{$list->id}}"  method="update">
-                <textarea name="" class="modal_post"></textarea>   <!--フォーム-->
-                <input type="hidden" name="" class="modal_id" value="">
-                <input type="submit" value="更新" onclick="return confirm('こちらの投稿で再投稿します。')"> <!--更新ボタン-->
+
+         <!--  <form action="{{ url('post/update/') }}/{{$list->id}}"  method="update">
+                <textarea name="" class="modal_post"></textarea>
+                <input type="hidden" name="" class="modal_id" value=""> -->
+                <input type="submit" value="更新" onclick="return confirm('こちらの投稿で再投稿します。')">
            </form>
            <a class="js-modal-close" href="">閉じる</a>
         </div>
