@@ -33,9 +33,6 @@ class UsersController extends Controller
       return view('posts.index',['list'=>$list],['user'=>$user]);
     }
 
-
-
-
 //ユーザーネーム
    {
       $user = \DB::table('users')->get();
@@ -49,4 +46,24 @@ class UsersController extends Controller
     })
     ->get();
 
-}}
+}
+
+public function edit() {
+        return view('user.edit', ['user' => Auth::user() ]);
+    }
+
+public function profile_update(Request $request)
+{
+$user = Auth::user();
+
+$user->username =  $request -> input('upUsername');
+$user->mail = $request -> input('upMail');
+$user->bio = $request -> input('upBio');
+
+//パラメータセットして更新
+$user->save();
+
+return redirect('/profile');
+}
+
+}

@@ -1,12 +1,12 @@
 @charset "utf-8";
 
 html {}
+.head
 
 body {
-        font-family: arial, sans-serif;
-            font-weight: normal;
-            font-size: 12px;
-
+font-family: arial, sans-serif;
+font-weight: normal;
+font-size: 12px;
 }
 
 input{
@@ -17,13 +17,12 @@ width: 200px;
 header {
     background: #286AC9;
     overflow: visible;
+    width: auto;
+    height: 200px;
 }
 
-.Atlas-images{
 
-}
-
-user-icon{
+.user-icon{
     float: left;
 }
 
@@ -128,8 +127,18 @@ ul ul li:first-child {
 
 }
 
-/*アイコンボタン*/
+.form-group{
+border: none;
+    /* 枠線を消す */
+    outline: none;
+    /* クリックしたときに表示される枠線を消す */
+    background: transparent;
+    /* 背景の灰色を消す */
+    width: 800px;
+    height: auto;
 
+}
+/*アイコンボタン*/
 .btn{
 display: inline-block;
     margin: 1em 0;
@@ -155,7 +164,27 @@ display: inline-block;
         /* 背景色 */
 }
 
-
+.btn-post{
+ border: none;
+ /* 枠線を消す */
+ outline: none;
+ /* クリックしたときに表示される枠線を消す */
+ background: transparent;
+/* 背景の灰色を消す */
+width: 100px;
+height: auto;
+}
+.js-modal-open-btn
+{
+border: none;
+    /* 枠線を消す */
+    outline: none;
+    /* クリックしたときに表示される枠線を消す */
+    background: transparent;
+    /* 背景の灰色を消す */
+    width: 100px;
+    height: auto;
+}
 /*アコーディオン */
 
 .menu-btn {
@@ -167,11 +196,6 @@ display: inline-block;
     background-color: #fff;
     outline: initial;
 }
-
-
-
-
-
 
 .menu-btn .inn:before {
     position: absolute;
@@ -217,5 +241,52 @@ display: inline-block;
 .menu.is-open {
     opacity: 1;
     transform: translateY(0);
+}
+
+.User-icon{
+ margin-right: auto;
+}
+
+/*編集機能*/
+
+.modal{
+    display: none;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+.modal__bg{
+    background: rgba(0,0,0,0.8);
+    height: 100vh;
+    position: absolute;
+    width: 100%;
+}
+.modal__content{
+    background: #fff;
+    left: 50%;
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 60%;
+}
+
+/*　プロフィール　*/
+.profile-form{
+display: block;
+
+}
+
+.textarea {
+    resize: none;
+    width: 300px;
+    height: 100px;
+}
+.modal_post
+{
+ resize: none;
+ width: 300px;
+ height: 100px;
 }
 
