@@ -32,6 +32,7 @@ Route::post('/added', 'Auth\RegisterController@added');
 
 //ログイン中のページ
 //トップページ
+Route::group(['middleware' => 'auth'], function() {
 Route::get('/top', 'UsersController@index');
 Route::get('/home', 'UsersController@index');
 //プロフィール画面
@@ -40,9 +41,13 @@ Route::get('/profile','UsersController@profile');
 Route::get('user/edit', 'UserController@edit');
 Route::post('/profile','UsersController@profile_update');
 
+
 //ユーザー検索
 Route::get('/search','UsersController@search');
 //フォロー・フォロワー機能実装
+ Route::post('search/follow/{id}', 'FollowsController@follow')->name('follow');;
+ Route::post('search/un_follow/{id}', 'FollowsController@unfollow')->name('unfollow');;
+
 Route::get('/follow-list','FollowsController@followList');
 Route::get('/follower-list','FollowsController@followerList');
 //ログアウト機能
@@ -53,3 +58,5 @@ Route::post('/post','PostsController@create');
 Route::get('/post/{id}/delete','PostsController@delete');
 //編集機能
 Route::get('/post/update/{id}','PostsController@update');
+
+});
