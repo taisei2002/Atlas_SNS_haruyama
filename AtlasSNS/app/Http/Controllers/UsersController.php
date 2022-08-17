@@ -17,10 +17,11 @@ class UsersController extends Controller
         $user = \DB::table('users')->get();
         return view('users.profile',['user'=>$user]);
 
-
     }
     public function search(Request $request){
-        $user = \DB::table('users')->get();
+        $id = Auth::id();
+        $user = User::all()->except(Auth::id());
+
         // 検索するテキスト取得
          $keyword = $request->input('keyword');
          $query = User::query();
@@ -34,6 +35,8 @@ class UsersController extends Controller
         return view('users.search',compact('user', 'keyword'));
 
     }
+
+
 
 
     public function users()
@@ -76,11 +79,11 @@ $user = Auth::user();
 
 
 //バリデーションを追加
-$rulus = [
+$rules = [
     'upUsername' => 'required|string|max:255',
     'upMail' => 'required|string|email|max:255',
     'upPassword' => 'required|string|min:4|confirmed',
-    'upBio' => '|string|max:150',
+    'upBio' => 'max:150',
 ];
 $message = [
     'upUsername.required' => '名前を入力してください。',
@@ -88,20 +91,24 @@ $message = [
     'upMail.email' => 'メールアドレスの形式ではありません',
     'upPassword.required' => 'パスワードは必須です。',
     'upPassword.confirmed'  => 'パスワードが一致しません',
-    'upBio' => '150字以内である必要があります。'
+    'upBio' => '150字以内である必要があります。',
 
 ];
 ////バリデーションを追加
- $validator = Validator::make($request->all(), $rulus, $message);
+ $validator = Validator::make($request->all(), $rules, $message);
 
- if ($validator->fails()) {
+ if
+
+ ($validator->fails()) {
+
    return redirect("/profile")
     ->withErrors($validator)
      ->withInput();
  }
 //条件に合う場合更新
 
-else{ $user->username =  $request -> input('upUsername');
+else {
+$user->username =  $request -> input('upUsername');
 $user->mail = $request -> input('upMail');
 $user->bio = $request -> input('upBio');
 $user->password = bcrypt($request->input('upPassword'));
@@ -109,7 +116,5 @@ $user->password = bcrypt($request->input('upPassword'));
 $user->save();
 
 return redirect('/profile');
-}
-}
-
+}}
 }

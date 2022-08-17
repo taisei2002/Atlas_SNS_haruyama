@@ -15,34 +15,48 @@ class FollowsController extends Controller
         return view('follows.followList',['user'=>$user]);
 }
 
-public function index(User $user)
-{
-    $all_users = $user->getAllUsers(auth()->user()->id);
-}
+
 
     public function followerList(User $user){
         $user = \DB::table('users')->get();
         return view('follows.followerList',['user'=>$user]);
     }
 
+//フォロー
  public function follow(User $user)
     {
-        $follower = auth()->user();
-        // フォローしているか
-        {
-          
-            // フォローしていなければフォローする
-            $follower->follow($user->id);
-            return back();
-        }
-    }
+        $auth=auth()->user()->id;
+        $user=User::find($auth);
 
-    public function unfollow(User $user)
+        $follower = Auth::user();
+        $is_following = $follower->isFollowing($user->id);
+dd($user);
+        if(!$is_following){
+             $follower->follow($user->id);
+        }
+            return back();
+}
+public function unfollow(User $user)
     {
-        $follower = auth()->user();
 
-            // フォローしていればフォローを解除する
+        $auth=auth()->user()->id;
+        $user=User::find($auth);
+
+        $follower = Auth::user();
+        $is_following = $follower->isFollowing($user->id);
+        if(!$is_following){
             $follower->unfollow($user->id);
-            return back();
         }
+
+        return back();
     }
+//テスト
+
+public function test(Request $request)
+{
+
+ $id = $request->input('id');
+\DB::table('users')->where('id',$id)->select();
+ return view('posts.test');
+}
+}

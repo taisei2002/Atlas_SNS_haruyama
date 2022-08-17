@@ -49,35 +49,38 @@ class User extends Authenticatable
 
     public function user()
     {
+
         return $this->belongsTo(User::class);
     }
 
-     public function follow($id)
+    //ユーザー表示
+        public function getAllUsers(Int $user_id)
     {
-
-        $user = User::users('id');
-        dd('いまここ');
-        return $this->follows('followed_id')->attach($id);
-
-
+        return $this->Where('id', '<>', $user_id);
     }
 
-    // フォロー解除する
-    public function unfollow( $user_id)
+// フォローする処理
+    public function follow(Int $user_id)
     {
+        return $this->follows()->attach($user_id);
+    }
 
+    public function unfollow(Int $user_id)
+    {
         return $this->follows()->detach($user_id);
     }
 
     // フォローしているか
-    public function isFollowing($user_id)
+    public function isFollowing(Int $user_id)
     {
-        return (boolean) $this->follows()->where('followed_id', $user_id)->first(['id']);
+
+        return $this->followUsers()->where('followed_id', $user_id)
+        ->exists();
     }
 
     // フォローされているか
-    public function isFollowed($user_id)
+    public function isFollowed(Int $user_id)
     {
-        return (boolean) $this->followers()->where('following_id', $user_id)->first(['id']);
+        return $this->follows()->where('following_id',$user_id)->exists();
     }
 }

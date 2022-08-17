@@ -41,12 +41,10 @@ Route::get('/profile','UsersController@profile');
 Route::get('user/edit', 'UserController@edit');
 Route::post('/profile','UsersController@profile_update');
 
-
+// ユーザ関連
+Route::resource('users', 'UsersController');
 //ユーザー検索
 Route::get('/search','UsersController@search');
-//フォロー・フォロワー機能実装
- Route::post('search/follow/{id}', 'FollowsController@follow')->name('follow');;
- Route::post('search/un_follow/{id}', 'FollowsController@unfollow')->name('unfollow');;
 
 Route::get('/follow-list','FollowsController@followList');
 Route::get('/follower-list','FollowsController@followerList');
@@ -59,4 +57,10 @@ Route::get('/post/{id}/delete','PostsController@delete');
 //編集機能
 Route::get('/post/update/{id}','PostsController@update');
 
+//テストページ
+Route::post('search/follow/test', 'FollowsController@test');
+
+//フォロー・フォロワー機能実装
+ Route::post('search/follow/{id}', 'FollowsController@follow')->name('follow');
+ Route::post('search/un_follow/{id}', 'FollowsController@unfollow')->name('unfollow');
 });
