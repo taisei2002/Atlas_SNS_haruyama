@@ -11,13 +11,13 @@ use Validator;
 
 class UsersController extends Controller
 {
-
-    //
+    //プロフィール
     public function profile(){
         $user = \DB::table('users')->get();
         return view('users.profile',['user'=>$user]);
 
     }
+    //ユーザー検索
     public function search(Request $request){
         $id = Auth::id();
         $user = User::all()->except(Auth::id());
@@ -31,33 +31,28 @@ class UsersController extends Controller
             $query->where('username','like','%'.$keyword.'%');//曖昧検索
         }
 
-     $user = $query->get();
+        $user = $query->get();
         return view('users.search',compact('user', 'keyword'));
-
     }
 
-
-
-
-    public function users()
-    {
-        $users = users::get();
-    }
     //投稿内容
     public function index()
       {
-         $user_id = Auth::id();
 
-    { $list = \DB::table('posts')->get();
-      $user = \DB::table('users')->first();
-      return view('posts.index',['list'=>$list],['user'=>$user]);
+       $user_id = Auth::id();
+       $user = \DB::table('users')->get();
+    {  $list = \DB::table('posts')->get();
+
+      return view('posts.index',['list'=>$list],
+      [ 'user' => $user,]);
     }
-
 //ユーザーネーム
-   {
       $user = \DB::table('users')->get();
-       return view('layouts.login',['user'=>$user]);
-  }
+
+
+       return view('layouts.login',
+       [    'user'  => $user,
+    ]);
 
     DB::table('users')
     ->leftJoin('posts', function ($join) {

@@ -13,21 +13,31 @@
 <!--ユーザー以外表示-->
 @if ($user->id !== Auth::user()->id)
 
-<h3>{{ $user->username }}
+<div>{{ $user->username }}
 
-     <div class="d-flex justify-content-end flex-grow-1">
-         <form action="{{ url('/search/follow/'.$user->id) }}" method="POST">
-      {{ csrf_field() }}
-      <button type="submit" class="btn btn-primary btn-sm">フォローする</button>
-    </form>
+ <div class="container">
+  <div class="row justify-content-center">
+   <div class="col-md-8">
+    <div class="ml-2 d-flex flex-column">
+<!--フォローボタン-->
+@if (auth()->user()->isFollowing($user->id))
+     <form action="{{ route('unfollow', ['id' => $user->id]) }}" method="POST">
+         {{ csrf_field() }}
+        {{ method_field('DELETE') }}
+         <button type="submit" class="btn btn-danger btn-sm">フォロー解除</button>
+     </form>
+       @else
+     <form action="{{ url('/search/follow/'.$user->id) }}" method="POST">
+        {{ csrf_field() }}
+        <button type="submit" class="btn btn-primary btn-sm">フォローする</button>
 
-    <form action="{{ url('/search/un_follow/{id}') }}" method="POST">
-      {{ csrf_field() }}
-      {{ method_field('') }}
-      <button type="submit" class="btn btn-danger btn-sm">フォロー解除</button>
-    </form>
+     </form>
+         @endif
+    </div>
+   </div>
+  </div>
+ </div>
 </div>
-</h3>
 
 @endif
 @endforeach

@@ -36,13 +36,13 @@ class User extends Authenticatable
     }
 
     // フォロワー→フォロー
-    public function followUsers()
+    public function  follows()
     {
         return $this->belongsToMany(self::class, 'follows', 'following_id', 'followed_id');
     }
 
     // フォロー→フォロワー
-    public function follows()
+    public function followUsers()
     {
         return $this->belongsToMany(self::class, 'follows', 'followed_id', 'following_id');
     }
@@ -62,25 +62,28 @@ class User extends Authenticatable
 // フォローする処理
     public function follow(Int $user_id)
     {
+
         return $this->follows()->attach($user_id);
+
     }
 
     public function unfollow(Int $user_id)
     {
+
         return $this->follows()->detach($user_id);
+
     }
 
     // フォローしているか
     public function isFollowing(Int $user_id)
     {
-
-        return $this->followUsers()->where('followed_id', $user_id)
-        ->exists();
+        return (boolean) $this->follows()->where('followed_id', $user_id)->first(['followed_id']);
     }
 
     // フォローされているか
     public function isFollowed(Int $user_id)
     {
-        return $this->follows()->where('following_id',$user_id)->exists();
+        return (boolean) $this->followers()->where('following_id', $user_id)->first(['following_id']);
     }
+
 }
