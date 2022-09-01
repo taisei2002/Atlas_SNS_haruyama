@@ -8,6 +8,9 @@
     <title></title>
     <link rel="stylesheet" href="{{ asset('css/reset.css') }} ">
     <link rel="stylesheet" href="{{ asset('css/style.css') }} ">
+     <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <!--スマホ,タブレット対応-->
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <!--サイトのアイコン指定-->
@@ -23,27 +26,26 @@
     <header>
         <div id = "head">
         <h1 class= "users"><a href="/top" ><img src="images/atlas.png"widht="0" height="50"></a></h1>
-            <div id="">
+            <div id="User">
                 <div id="User-icon">
-                    <p>〇〇さん<a href="/profile" ><img src="images/icon1.png" widht="0" height="50"></p>
+                    <p>{{ Auth::user()->username }}さん<a href="/profile" ><img src="images/icon1.png" widht="0" height="50"></p>
                 <div>
-<a></a>
+                    <a></a>
 <button type="button" class="menu-btn">
   <span class="inn"></span>
 </button>
 
-
               <ul>
 	<li class="block">
 		<input type="checkbox" name="item" id="item1" />
-		<label for="item1"><i aria-hidden="true" class="icon-users"></i> Friends </label>
+		<label for="item1"><i aria-hidden="true" class="icon-users"></i>menu</label>
 		<ul class="options">
 			<li><a href="/top"><i aria-hidden="true" class="icon-search"></i> HOME</a></li>
 			<li><a href="/profile"><i aria-hidden="true" class="icon-point-right"></i> プロフィール編集</a></li>
+
 			<li><a href="/logout"><i aria-hidden="true" class="icon-fire"></i>ログアウト</a></li>
 		</ul>
 	</li>
-
             </div>
         </div>
     </header>
@@ -51,17 +53,18 @@
         <div id="container">
             @yield('content')
         </div >
+
         <div id="side-bar">
             <div id="confirm">
-                <p>〇〇さんの</p>
+                <p>{{ Auth::user()->username }}さんの</p>
                 <div>
                 <p>フォロー数</p>
-                <p>〇〇名</p>
+                <p>{{ Auth::user()->follows()->get()->count() }}名</p>
                 </div>
                 <p class="btn"><a href="/follow-list">フォローリスト</a></p>
                 <div>
                 <p>フォロワー数</p>
-                <p>〇〇名</p>
+                <p>{{ Auth::user()->followUsers()->get()->count() }}名</p>
                 </div>
                 <p class="btn"><a href="/follower-list">フォロワーリスト</a></p>
             </div>
