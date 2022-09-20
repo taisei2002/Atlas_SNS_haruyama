@@ -1,18 +1,17 @@
 @extends('layouts.login')
 
 @section('content')
+
 {!! Form::open(['method' => 'GET']) !!}
-
-
-
-
 {!! Form::close() !!}
 @foreach ($user as $user)
 <!--ユーザー以外表示-->
 @if ($user->id !== Auth::user()->id)
 
-<div>{{ $user->username }}
 
+
+<div><a href="{{ url('/profile_users',$user->id) }}"><img src="{{ asset('/storage/images/'.$user->images) }}"  class="rounded-circle" width="50" height="50"></a>
+ {{ $user->username }}
  <div class="container">
   <div class="row justify-content-center">
    <div class="col-md-8">

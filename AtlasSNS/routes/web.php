@@ -63,4 +63,8 @@ Route::post('search/follow/test', 'FollowsController@test');
 //フォロー・フォロワー機能実装
  Route::post('search/follow/{id}', 'FollowsController@follow');
  Route::delete('search/un_follow/{id}', 'FollowsController@unfollow')->name('unfollow');
+
+ //他ユーザー
+Route::get('profile_users/{id}','UsersController@users_profile');
+
 });

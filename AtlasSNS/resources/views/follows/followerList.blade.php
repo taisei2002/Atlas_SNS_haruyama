@@ -7,7 +7,7 @@
 <!--ユーザー以外表示-->
 @if ($user->id !== Auth::user()->id)
 
-
+<div><a href="{{ url('/profile_users',$user->id) }}"><img src="{{ asset('/storage/images/'.$user->images) }}"  class="rounded-circle" width="50" height="50"></a></div>
 <div>{{ $user->username }}
 <div class="container">
   <div class="row justify-content-center">
