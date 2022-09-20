@@ -8,6 +8,7 @@ use App\Post;
 use App\User;
 use Auth;
 use Validator;
+use DB;
 
 class UsersController extends Controller
 {
@@ -79,6 +80,7 @@ $rules = [
     'upMail' => 'required|string|email|max:255',
     'upPassword' => 'required|string|min:4|confirmed',
     'upBio' => 'max:150',
+    'upimages' => 'file|image|mimes:jpeg,png,jpg|max:2048'
 ];
 $message = [
     'upUsername.required' => '名前を入力してください。',
@@ -91,6 +93,7 @@ $message = [
 ];
 ////バリデーションを追加
  $validator = Validator::make($request->all(), $rules, $message);
+
 
  if
 
@@ -107,9 +110,27 @@ $user->username =  $request -> input('upUsername');
 $user->mail = $request -> input('upMail');
 $user->bio = $request -> input('upBio');
 $user->password = bcrypt($request->input('upPassword'));
+$image_path = $request->file('upimages')->store('public/images');
+$user->images = basename($image_path);
+
 //パラメータセットして更新
 $user->save();
 
 return redirect('/profile');
 }}
+
+//他ユーザープロフィール
+public function users_profile($id){
+$user_id = User::find($id);//user_id
+
+//$user = User::find([$id]);
+//$post = Post::find([$user_id]);
+
+$user = DB::table('users')
+        ->leftJoin('posts', 'users.id', '=', 'posts.user_id')
+        ->find([$user_id]);
+
+
+  return view('users.users_profile',['user'=>$user]);
+}
 }
