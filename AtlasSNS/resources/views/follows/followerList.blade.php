@@ -2,7 +2,15 @@
 
 @section('content')
 
-{!! Form::close() !!}
+@foreach ($images as $images)
+
+@if ($images->id !== Auth::user()->id)
+
+<a href="{{ url('/profile_users',$images->id) }}"><img src="{{ asset('/storage/images/'.$images->images) }}"  class="rounded-circle" width="50" height="50"></a>
+
+@endif
+@endforeach
+
 @foreach ($user as $user)
 <!--ユーザー以外表示-->
 @if ($user->id !== Auth::user()->id)

@@ -14,19 +14,54 @@ use Illuminate\Http\Request;
 class FollowsController extends Controller
 {
 
-    public function followList(User $user, Follow $follower){
+    public function followList(Post $post, User $user, Follow $follower){
 
-        $follower = Auth::user();
+      //  $follower = Auth::user();
         $follows = auth()->user()->follows()->get();
 
-        return view('follows.followList')->with([
-            'user'=>$follows,]);
+        $user = auth()->user();
+        $follow_ids = $follower->followingIds($user->id);
+        $following_ids = $follow_ids->pluck('followed_id')->toArray();
+        $posts = $post->getTimelines($user->id, $following_ids);
+
+
+        //つぶやき　テストコード
+        //$user_id = DB::table('posts');
+        //$post = DB::table('users')
+        //->leftJoin('posts', 'users.id', '=', 'posts.user_id')//テーブル結合
+        //->get();
+
+
+//画像アイコン
+        $images = DB::table('users')->get();
+        $images = auth()->user()->follows()->get();
+
+
+        return view('follows.followList')->with(['user'=>$follows,'images'=>$images,'post'=>$posts]);
 }
+
+
+public function timeline() {
+        $posts = Post::query()->whereIn('user_id', Auth::user()->follows()->pluck('followed_user_id'))->latest()->get();
+        return view('posts.timeline')->with([
+            'posts' => $post,
+            ]);
+    }
 
     public function followerList(User $user){
         //フォロワーリスト
         $followers = auth()->user()->followUsers()->get();
-        return view('follows.followerList')->with(['user'=>$followers]);
+
+        $images = DB::table('users')->get();
+        $images = auth()->user()->followUsers()->get();
+
+             $user = DB::table('users')
+        ->leftJoin('posts', 'users.id', '=', 'posts.user_id')//テーブル結合
+      //  ->where( 'posts.posts','=',$id )
+          ->get();
+
+
+        return view('follows.followerList')->with(['user'=>$followers,'images'=>$images ]);
     }
 
 //フォロー

@@ -86,4 +86,9 @@ class User extends Authenticatable
         return (boolean) $this->followers()->where('following_id', $user_id)->first(['following_id']);
     }
 
+        public function getTimeLines(Int $user_id)
+    {
+        return $this->where('user_id', $user_id)->orderBy('created_at', 'DESC');
+    }
+
 }

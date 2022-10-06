@@ -12,7 +12,7 @@ use DB;
 
 class UsersController extends Controller
 {
-    //プロフィール
+    //認証ユーザープロフィール
     public function profile(){
         $user = \DB::table('users')->get();
         return view('users.profile',['user'=>$user]);
@@ -40,29 +40,13 @@ class UsersController extends Controller
     public function index()
       {
 
-       $user_id = Auth::id();
-       $user = \DB::table('users')->get();
-    {  $list = \DB::table('posts')->get();
+$user = DB::table('users')
+        ->leftJoin('posts', 'users.id', '=', 'posts.user_id')//テーブル結合
+        ->get();
 
-      return view('posts.index',['list'=>$list],
-      [ 'user' => $user,]);
+        return view('posts.index',[ 'user' => $user,]);
     }
-//ユーザーネーム
-      $user = \DB::table('users')->get();
 
-
-       return view('layouts.login',
-       [    'user'  => $user,
-    ]);
-
-    DB::table('users')
-    ->leftJoin('posts', function ($join) {
-        $join->on('username.id', '=', 'post.id');
-
-    })
-    ->get();
-
-}
 
 //プロフィール更新
 public function edit() {
@@ -121,16 +105,16 @@ return redirect('/profile');
 
 //他ユーザープロフィール
 public function users_profile($id){
-$user_id = User::find($id);//user_id
 
-//$user = User::find([$id]);
-//$post = Post::find([$user_id]);
+$profile = DB::table('users')->where( 'users.id', '=' , $id )->get();
+$profile = auth()->user()->follows()->where( 'users.id', '=' , $id )->get();
 
 $user = DB::table('users')
-        ->leftJoin('posts', 'users.id', '=', 'posts.user_id')
-        ->find([$user_id]);
+        ->leftJoin('posts', 'users.id', '=', 'posts.user_id')//テーブル結合
+        ->where( 'users.id', '=' , $id )
+        ->get();
 
-
-  return view('users.users_profile',['user'=>$user]);
+  return view('users.users_profile',['user'=>$user,'profile'=> $profile]);
 }
+
 }
