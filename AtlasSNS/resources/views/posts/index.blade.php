@@ -16,24 +16,24 @@
         <button type="submit" class="btn-post"><img src="images/post.png"width="50" height="50"></button>
 
 
-   @foreach ($user as $user)
+   @foreach ($posts as $post)
 
-
+@if ($post->id !== Auth::user()->id)
 
 <hr class="style1">
 
 
  <div class="frame">
-    <img src="{{ asset('/storage/images/'.$user->images) }}" alt="mitsuruog" class="rounded-circle"width="55" height="55">
-    <span class="left">{{ $user->username}}</span>
-     <span class="right">{{ $user->created_at}}</span>
+    <img src="{{ asset('/storage/images/'.$post->user->images) }}" alt="mitsuruog" class="rounded-circle"width="55" height="55">
+    <span class="left">{{ $post->user->username}}</span>
+     <span class="right">{{ $post->user->created_at}}</span>
   </div>
-  <p class="right">{{ $user->post}}</p>
+  <p class="right">{{ $post->post}}</p>
 
   <!-- 投稿の編集ボタン -->
-  @if (Auth::user()->id == $user->user_id)
+  @if (Auth::user()->id == $post->user_id)
          <div class="content">
-        <a class="js-modal-open" href="" post="{{ $user->post }}" post_id="{{ $user->id }}"><img src="images/edit.png"width="50" height="50"></a>
+        <a class="js-modal-open" href="" post="{{ $post->post }}" post_id="{{ $user->id }}"><img src="images/edit.png"width="50" height="50"></a>
     </div>
 @endif
  {!! Form::close() !!}
@@ -44,7 +44,7 @@
 
         <div class="modal__bg js-modal-close"></div>
         <div class="modal__content">
-            <form action="/post/update/{$user->user->id}"  method="">
+            <form action="/post/update/{$post->user->id}"  method="">
                 <textarea name="upPost" class="modal_post" ></textarea>
                 <input type="hidden" name="id" class="modal_id" value="">
             <!-- 更新ボタン -->
@@ -56,9 +56,9 @@
 
 
 
-  @if (Auth::user()->id == $user->user_id)
-<a class="btn-post" href="/post/{{$user->id}}/delete" onclick="return confirm('こちらの投稿を削除してもよろしいでしょうか？')"><img src="images/trash-h.png"width="50" height="50"></a>
-
+  @if (Auth::user()->id == $post->user_id)
+<a class="btn-post" href="/post/{{$post->user->id}}/delete" onclick="return confirm('こちらの投稿を削除してもよろしいでしょうか？')"><img src="images/trash-h.png"width="50" height="50"></a>
+  @endif
 
 
   @endif
