@@ -9,6 +9,7 @@ use App\User;
 use Auth;
 use Validator;
 use DB;
+use App\Follow;
 
 class UsersController extends Controller
 {
@@ -46,7 +47,6 @@ $user = DB::table('users')
 
         return view('posts.index',[ 'user' => $user,]);
     }
-
 
 //プロフィール更新
 public function edit() {
@@ -108,6 +108,12 @@ public function users_profile($id){
 
 $profile = DB::table('users')->where( 'users.id', '=' , $id )->get();
 $profile = auth()->user()->follows()->where( 'users.id', '=' , $id )->get();
+
+
+ $profile = DB::table('users')
+        ->leftJoin('posts', 'users.id', '=', 'posts.user_id')//テーブル結合
+        ->where( 'users.id', '=' , $id )
+        ->get();
 
 $user = DB::table('users')
         ->leftJoin('posts', 'users.id', '=', 'posts.user_id')//テーブル結合
