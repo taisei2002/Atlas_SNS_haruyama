@@ -1,16 +1,21 @@
 @charset "utf-8";
 
-html {}
-.head
-
-body {
-font-family: arial, sans-serif;
-font-weight: normal;
-font-size: 12px;
+html {
+    width: 100%;
+    overflow-y: scroll;
 }
 
-input{
-width: 200px;
+.head{
+display: flex;
+justify-content: space-between;
+}
+
+.head body {
+    font-family: arial, sans-serif;
+    font-weight: normal;
+    font-size: 12px;
+    padding: 2rem;
+    width: 1500;
 }
 
 /* header */
@@ -18,19 +23,18 @@ header {
     background: #286AC9;
     overflow: visible;
     width: auto;
-    height: 200px;
+    height: 100px;
 }
 
-
-.user-icon{
-    float: left;
+.Atlas_icon{
+    display: flex;
+    padding-top: 30px;
+    margin-left: 30px;
 }
 
-
-head {}
-
-.accordion-menu {
-    text-align: right
+.User_icon {
+position: absolute;
+    right: 0;
 }
 
 /* main content */
@@ -44,26 +48,92 @@ head {}
 }
 
 #side-bar {
+
     flex: 0 0 19%;
     border-left: 1px solid #727272;
 }
 
+.tweet_form{
+outline: none;
+border: none;
+width: 1000px;
+
+}
+
+.index-form{
+display: flex;
+margin-left: 92px;
+margin-top: 30px;
+
+}
+
+.btn-post {
+  margin-left: 85%;
+  border: none;
+}
+.btn-post:active{
+  outline:none;
+}
+
 /* accordion-menu */
+.accordion-menu {
+/*影を消す*/
+box-shadow: none;
+z-index: 0;
+position: relative;
+}
+
+.accordion-container .accordion-title {
+    display: block;
+    position: relative;
+    background: #286AC9;
+    height: 70px;
+
+}
+
+.accordion-title:after {
+    content: "";
+    position: absolute;
+    right: 140px;
+    top: 30%;
+    transition: all 0.2s ease-in-out;
+    display: block;
+    width: 15px;
+    height: 15px;
+    border-top: solid 4px #fff;
+    border-right: solid 4px #fff;
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+}
+
+.accordion-title.open:after {
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    top: 45%;
+}
+
+
 
 ul {
+
     list-style: none;
     margin: 0;
     padding: 0;
-    width: 200px;
+    width: 325px;
+
     margin-left: auto;
+    margin-top: 100px;
     -moz-box-shadow: 0 0 5px #111;
     -webkit-box-shadow: 0 0 5px #111;
     box-shadow: 0 0 5px #111;
+
+
 }
 
 ul li input[type='checkbox'] {
     display: none;
 }
+
 /*当たり判定*/
 ul li label {
     display: block;
@@ -74,21 +144,10 @@ ul li label {
 ul li i {
     font-size: 18px;
     vertical-align: middle;
-    width: 20px;
     display: inline-block;
+
 }
 
-ul li input[type='checkbox']:checked~label {
-    background: -o-linear-gradient(top, #44c6eb, #2799db);
-}
-
-/*メニュー高さ*/
-ul li input[type='checkbox']:checked~.options {
-    height: auto;
-    display: block;
-    min-height: 40px;
-    max-height: 400px;
-}
 /*メニュー背景*/
 ul ul {
     background: #fff;
@@ -101,7 +160,7 @@ ul ul {
 
 ul ul li a {
     display: block;
-    padding: 25px 25px;
+    padding: 33px;
     color: #999;
     text-decoration: none;
 }
@@ -112,71 +171,76 @@ ul ul li a:hover {
 }
 
 
-ul ul li {
-    border-bottom: 1px solid #ccc;
-}
-
-ul ul li:first-child {
-    padding-top: 5px;
-}
-
-.options {
-    height: 0;
-    display: block;
-    overflow: hidden;
-
-}
-
-.form-group{
-border: none;
-    /* 枠線を消す */
-    outline: none;
-    /* クリックしたときに表示される枠線を消す */
-    background: transparent;
-    /* 背景の灰色を消す */
-    width: 800px;
-    height: auto;
-
-}
-/*アイコンボタン*/
-.btn{
-display: inline-block;
-    margin: 1em 0;
-    /* 前後のスペース */
-    padding: 0.6em 1em;
-    /* 文字周りの余白 */
-    color: #FFF;
-    /* テキストカラー */
-    font-size: 0.95em;
-    /* フォントサイズ */
+.submenuItems {
+    display: none;
+    text-align: center;
+    font-size: x-large;
     text-decoration: none;
-    /* 下線を消す */
-    background: #0066FF;
-    /* 背景色 */
-    border-radius: 5px;
-    /* 角の丸み */
-    transition: 0.3s;
-    /* ホバーの変化を滑らかに */
-}
-.btn:hover{
-        background: #44c6eb;
-        color: #0066FF;
-        /* 背景色 */
+    z-index: 2;
+    border: 2px solid #000088;
 }
 
-.btn-post{
- border: none;
- /* 枠線を消す */
- outline: none;
- /* クリックしたときに表示される枠線を消す */
- background: transparent;
-/* 背景の灰色を消す */
-width: 100px;
-height: auto;
+
+/*follow＆searchアイコンボタン*/
+
+.follow-list-btn {
+    display: inline-block;
+        margin: 1em 0;
+        /* 前後のスペース */
+        padding: 0.6em 1em;
+        /* 文字周りの余白 */
+        color: honeydew;
+        /* テキストカラー */
+        font-size: 0.95em;
+        /* フォントサイズ */
+        text-decoration: none;
+        /* 下線を消す */
+        background-color: #005FFF;
+        /* 背景色 */
+        border-radius: 7px;
+        /* 角の丸み */
+        margin-top: auto;
 }
-.js-modal-open-btn
-{
-border: none;
+.follow-list-btn-position{
+    text-align: right;
+        display: block;
+        margin-right: 20px;
+}
+
+.follows-count{
+display: inline-block;
+margin-left: 50px;
+}
+
+.search-btn{
+    text-decoration: none;
+
+    display: inline-block;/* 前後のスペース */
+    padding: 0.6em 1em;
+    background-color: #005FFF;/* 背景色 */
+    border-radius: 7px;/* 角の丸み */
+    text-decoration: none;
+    font-size: 15px;/*文字の大きさ*/
+    padding-left: 40px;/*ボタンの大きさ*/
+    padding-right: 40px;
+    margin-left: 57px;/*ボタンの位置*/
+    }
+
+
+/*つぶやき*/
+
+.edit-btn{
+display: flex;
+justify-content: flex-end;
+margin-right: 30px;
+
+}
+.js-modal-open{
+margin-top: 5px;
+}
+
+.js-modal-open-btn {
+    border: none;
     /* 枠線を消す */
     outline: none;
     /* クリックしたときに表示される枠線を消す */
@@ -184,6 +248,16 @@ border: none;
     /* 背景の灰色を消す */
     width: 100px;
     height: auto;
+    margin-left: 1160px;
+
+}
+.modal_edit{
+    display: flex;
+    width: 40px;
+    height: 40px;
+    margin-left: 850px;
+
+
 }
 /*アコーディオン */
 
@@ -243,38 +317,59 @@ border: none;
     transform: translateY(0);
 }
 
-.User-icon{
- margin-right: auto;
+.User-icon {
+    margin-right: auto;
 }
+
+.z-index_test {
+
+}
+
 
 /*編集機能*/
 
-.modal{
+.modal {
     display: none;
     height: 100vh;
     position: fixed;
     top: 0;
     width: 100%;
 }
-.modal__bg{
-    background: rgba(0,0,0,0.8);
+
+.modal__bg {
+    background-color: rgba(0, 0, 0, 0.1);
     height: 100vh;
     position: absolute;
     width: 100%;
+
+
 }
-.modal__content{
+
+div.modal__content {
     background: #fff;
     left: 50%;
-    padding: 40px;
+    padding-top: 50px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom:29px;
     position: absolute;
     top: 50%;
-    transform: translate(-50%,-50%);
-    width: 60%;
+    transform: translate(-50%, -50%);
+    border-radius: 9px;
+
+}
+
+.profile-menu {
+
+    padding-left: 500px;
+    padding-top: 85px;
+    box-sizing: border-box;
+
 }
 
 /*　プロフィール　*/
-.profile-form{
-display: block;
+.profile-form {
+    display: block;
 
 }
 
@@ -283,10 +378,146 @@ display: block;
     width: 300px;
     height: 100px;
 }
-.modal_post
-{
- resize: none;
- width: 300px;
- height: 100px;
+
+.modal_post {
+    resize: none;
+    width: 925px;
+    height: 250px;
 }
 
+.input-profile {
+
+    width: 400px;
+    height: 100px;
+    font-size: 100%;
+}
+.password{
+    width: 400px;
+    height: 40px;
+    font-size: 100%;
+}
+.profile_form{
+padding-bottom: 20px;
+
+}
+.hidden{
+    visibility: hidden;
+}
+
+
+.left,
+.right {
+    display: inline-block;
+}
+
+.frame {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 150px;
+}
+
+
+.right {
+    display: inline-block;
+    margin-left: 200px;
+}
+
+.left {
+    margin-right: auto;
+}
+
+.frame {
+    display: flex;
+}
+
+
+hr.style1 {
+    border-top: 1px solid #8c8b8b;
+}
+
+
+/*ユーザー検索*/
+
+.search-users{
+margin-right: auto;
+margin-left:40%;
+}
+
+.follow-btn{
+padding-bottom: 30px;
+padding-left: 200px;
+width: 400px;
+display: flex;
+
+
+
+}
+
+.btn-unfollow
+{
+border: none;
+outline: none;
+background: transparent;
+color: #fff;
+background-color: #FF3333;
+padding-top: 7px;
+padding-left: 30px;
+padding-right: 30px;
+padding-bottom: 7px;
+border-radius: 7px;
+}
+
+.btn-following
+{
+border: none;
+outline: none;
+background: transparent;
+color: #fff;
+background-color: #3399FF;
+padding-top: 7px;
+padding-left: 30px;
+padding-right: 30px;
+padding-bottom: 7px;
+border-radius: 7px;
+}
+
+
+.search_container {
+    box-sizing: border-box;
+    padding-top: 50px;
+    padding-left: 50px;
+
+}
+
+.search_container input[type="text"] {
+  width: 375px;
+  height: 55px;
+  border-radius: 7px;
+}
+
+.search_container input[type="text"]:focus {
+    outline: 0;
+
+}
+
+.search_container input[type="submit"] {
+    cursor: pointer;
+    font-family: FontAwesome;
+    border: none;
+    background: #186AC9;
+    color: #fff;
+    outline: none;
+    width: 3.0em;
+    height: 50px;
+    border-radius: 5px;
+
+}
+
+.search-btn-icon{
+float: right;
+padding-right: 810px;
+
+}
+
+
+/*test*/
