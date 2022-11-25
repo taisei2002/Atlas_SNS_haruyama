@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 
+
 class RegisterController extends Controller
 {
     /*
@@ -51,8 +52,17 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'username' => 'required|string|max:255',
             'mail' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:4|confirmed',
-        ]);
+            'password' => 'required|string|min:4|',
+
+        ],[
+            'username.required' => '名前を入力してください。',
+            'mail.required' => 'メールアドレスは必須です。',
+            'mail.email' => 'メールアドレスの形式ではありません',
+            'password.required' => 'パスワードは必須です。',
+
+
+]);
+
     }
 
     /**
@@ -63,29 +73,51 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
         return User::create([
             'username' => $data['username'],
             'mail' => $data['mail'],
             'password' => bcrypt($data['password']),
+
         ]);
+
+
     }
 
 
-    // public function registerForm(){
-    //     return view("auth.register");
-    // }
+     public function registerForm(){
+
+         return view("auth.register");
+     }
+
 
     public function register(Request $request){
-        if($request->isMethod('post')){
-            $data = $request->input();
 
-            $this->create($data);
+        if($request->isMethod('post')){
+
+            $data = $request->input();
+////バリデーションを追加
+            $validator = $this->validator($data);
+
+        if ($validator->fails()) {
+        return redirect("/register")
+          ->withErrors($validator)
+            ->withInput();
+
+ }
+        else {
+             $this->create($data);
             return redirect('added');
-        }
+        }}
+
         return view('auth.register');
     }
 
-    public function added(){
-        return view('auth.added');
+    public function added(User $user){
+
+        $username = User::orderBy('created_at', 'desc')->first('username');
+
+        return view('auth.added',['user'=>$username]);
+
     }
 }

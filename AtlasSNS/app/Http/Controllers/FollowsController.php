@@ -16,20 +16,14 @@ class FollowsController extends Controller
 
     public function followList(Post $post, User $user, Follow $follower){
 
-      //  $follower = Auth::user();
-        $follows = auth()->user()->follows()->get();
 
-        $user = auth()->user();
+        $follows = auth()->user()->follows()->get();//フォロー取得
+        $user = auth()->user();//認証ユーザー取得
         $follow_ids = $follower->followingIds($user->id);
         $following_ids = $follow_ids->pluck('followed_id')->toArray();
-        $posts = $post->getTimelines($user->id, $following_ids);
-
-
-        //つぶやき　テストコード
-        //$user_id = DB::table('posts');
-        //$post = DB::table('users')
-        //->leftJoin('posts', 'users.id', '=', 'posts.user_id')//テーブル結合
-        //->get();
+        $posts = Post::whereIn('user_id', $following_ids)
+        ->orderBy('created_at','desc')
+        ->get();
 
 
 //画像アイコン
@@ -37,7 +31,7 @@ class FollowsController extends Controller
         $images = auth()->user()->follows()->get();
 
 
-        return view('follows.followList')->with(['user'=>$follows,'images'=>$images,'post'=>$posts]);
+        return view('follows.followList', compact('posts'))->with(['images'=>$images]);
 }
 
 
@@ -48,9 +42,17 @@ public function timeline() {
             ]);
     }
 
-    public function followerList(User $user){
+    public function followerList(User $user, Follow $follower){
         //フォロワーリスト
-        $followers = auth()->user()->followUsers()->get();
+        $followers = auth()->user()->followUsers()->get();//フォロワー取得
+        $user = auth()->user();//認証ユーザー取得
+        $follower_ids = $follower->followedIds($user->id);
+        $followed_ids = $follower_ids->pluck('following_id')->toArray();
+        $posts = Post::whereIn('user_id', $followed_ids)
+        ->orderBy('created_at','desc')
+        ->get();
+
+
 
         $images = DB::table('users')->get();
         $images = auth()->user()->followUsers()->get();
@@ -61,7 +63,7 @@ public function timeline() {
           ->get();
 
 
-        return view('follows.followerList')->with(['user'=>$followers,'images'=>$images ]);
+        return view('follows.followerList',compact('posts'))->with(['user'=>$followers,'images'=>$images ]);
     }
 
 //フォロー
@@ -96,4 +98,15 @@ public function unfollow(User $User , $id)
         }
         return back();
     }
-}
+
+
+public function test(Request $request)
+{
+
+
+
+$user = Auth::user();
+
+  return view('posts.test');
+
+}}

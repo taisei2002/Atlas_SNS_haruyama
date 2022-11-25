@@ -57,13 +57,11 @@ public function update(Request $request)
  ->update(
     ['post' => $up_post]
    );
+
  return redirect('/top');
 
     }
-//public function show(){
-  // Postモデル経由でpostsテーブルのレコードを取得
-//  $posts = Post::get();
-//  return view('index', compact('posts'));
-//}
+
+
 
 }

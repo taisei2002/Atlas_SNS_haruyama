@@ -38,14 +38,20 @@ class UsersController extends Controller
     }
 
     //投稿内容
-    public function index()
+    public function index(Post $post, User $user, Follow $follower)
       {
 
-$user = DB::table('users')
-        ->leftJoin('posts', 'users.id', '=', 'posts.user_id')//テーブル結合
+
+        $follows = auth()->user()->follows()->get();//フォロー取得
+        $user = auth()->user();//認証ユーザー取得
+        $follow_ids = $follower->followingIds($user->id);
+        $following_ids = $follow_ids->pluck('followed_id')->toArray();
+        $posts = Post::whereIn('user_id', $following_ids)
+        ->orWhereIn('user_id',$user)
+        ->orderBy('created_at','desc')
         ->get();
 
-        return view('posts.index',[ 'user' => $user,]);
+        return view('posts.index',compact('posts'));
     }
 
 //プロフィール更新
@@ -110,10 +116,8 @@ $profile = DB::table('users')->where( 'users.id', '=' , $id )->get();
 $profile = auth()->user()->follows()->where( 'users.id', '=' , $id )->get();
 
 
- $profile = DB::table('users')
-        ->leftJoin('posts', 'users.id', '=', 'posts.user_id')//テーブル結合
-        ->where( 'users.id', '=' , $id )
-        ->get();
+ $profile = User::find($id);
+
 
 $user = DB::table('users')
         ->leftJoin('posts', 'users.id', '=', 'posts.user_id')//テーブル結合
