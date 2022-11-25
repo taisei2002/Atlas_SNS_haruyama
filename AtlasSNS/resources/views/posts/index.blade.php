@@ -11,57 +11,51 @@
       {!! Form::input('text', 'newPost', null, ['required', 'class' => 'tweet_form', 'placeholder' => '投稿内容を入力してください']) !!}
   </div>
   </div>
+
   <!--投稿ボタン-->
 
         <button type="submit" class="btn-post"><img src="images/post.png"width="50" height="50"></button>
+        <br></br>
+    <h1 class =  "main_border"></h1>
 
-
-   @foreach ($user as $user)
-
-
-
-<hr class="style1">
-
+   @foreach ($posts as $post)
 
  <div class="frame">
-    <img src="{{ asset('/storage/images/'.$user->images) }}" alt="mitsuruog" class="rounded-circle"width="55" height="55">
-    <span class="left">{{ $user->username}}</span>
-     <span class="right">{{ $user->created_at}}</span>
+    <img src="{{ asset('/storage/images/'.$post->user->images) }}" alt="mitsuruog" class="rounded-circle"width="55" height="55">
+    <span class="left">{{ $post->user->username}}</span>
+     <span class="right">{{ $post->created_at}}　　</span>
   </div>
-  <p class="right">{{ $user->post}}</p>
+  <p class="right">{{ $post->post}}</p>
 
   <!-- 投稿の編集ボタン -->
-  @if (Auth::user()->id == $user->user_id)
+  @if (Auth::user()->id == $post->user_id)
          <div class="content">
-        <a class="js-modal-open" href="" post="{{ $user->post }}" post_id="{{ $user->id }}"><img src="images/edit.png"width="50" height="50"></a>
+        <div class = "edit-btn">
+        <a class="js-modal-open" href="" post="{{ $post->post }}" post_id="{{ $post->id }}"><img src="images/edit.png"width="45" height="45">　</a>
+          @if (Auth::user()->id == $post->user_id)
+<a href="/post/{{$post->id}}/delete" onclick="return confirm('こちらの投稿を削除してもよろしいでしょうか？')"><img src="images/trash.png"width="45" height="45"></a></div>
+
     </div>
 @endif
  {!! Form::close() !!}
-
 
    <!-- モーダルの中身 -->
     <div class="modal js-modal">
 
         <div class="modal__bg js-modal-close"></div>
         <div class="modal__content">
-            <form action="/post/update/{$user->user->id}"  method="">
+            <form action="/post/update/{$post->user->id}"  method="">
                 <textarea name="upPost" class="modal_post" ></textarea>
                 <input type="hidden" name="id" class="modal_id" value="">
             <!-- 更新ボタン -->
-                <input type="submit" value="更新" onclick="return confirm('こちらの投稿で再投稿します。')">
+                <br></br>
+                <input class= "modal_edit" type="image" src="images/edit.png" onclick="return confirm('こちらの投稿で再投稿します。')">
            </form>
-           <a class="js-modal-close" href="">閉じる</a>
+           <a class="js-modal-close" href=""></a>
         </div>
         </div>
-
-
-
-  @if (Auth::user()->id == $user->user_id)
-<a class="btn-post" href="/post/{{$user->id}}/delete" onclick="return confirm('こちらの投稿を削除してもよろしいでしょうか？')"><img src="images/trash-h.png"width="50" height="50"></a>
-
-
-
   @endif
+  <hr class="style1">
 @endforeach
 @endsection
 

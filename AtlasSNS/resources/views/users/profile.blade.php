@@ -1,56 +1,64 @@
 @extends('layouts.login')
 
 @section('content')
+<!--<div class = "profile-menu"> -->
  @foreach ($user as $user) @endforeach
 
 
+ <div class= "profile-menu">
+
 {{ csrf_field() }}
 {{ method_field('get') }}
-{!! Form::open(['url' => '/profile','method'=>'post']) !!}
-
+{!! Form::open(['url' => '/profile','method'=>'post',"enctype"=>"multipart/form-data"]) !!}
 
  <table>
-<!-- 　ユーザーネーム　-->
-<th>{{ Form::label('user name') }}</th>
-<tr><td>{{ Form::input('text','upUsername', Auth::user()->username ,['class' => 'input']) }}</td></tr>
-@if ($errors->has('upUsername'))
+    <div class = "profile-images">
+      <a href="/profile" ><img src="{{ asset('/storage/images/'.Auth::user()->images) }}" class="rounded-circle" width="50" height="50"></a></div>
+		<tr>
+			<th>{{ Form::label('user name') }}</th>
+			<td>{{ Form::input('text','upUsername', Auth::user()->username ,['class' => 'input-profile']) }}
+            @if ($errors->has('upUsername'))
 <p class='error-string'>{{ $errors->first('upUsername') }}</p>
  @endif
-
-<!-- 　メールアドレス　-->
-<th>{{ Form::label('mail address') }}</th>
-<tr><td>{{ Form::text('upMail',Auth::user()->mail,['class' => 'input']) }}</td></tr>
+            </td>
+		</tr>
+			<th>{{ Form::label('mail address') }}</th>
+			<td>{{ Form::text('upMail',Auth::user()->mail,['class' => 'input-profile']) }}</td>
 @if ($errors->has('upMail'))
 <p class='error-string'>{{ $errors->first('upMail') }}</p>
  @endif
+		</tr>
 
-<!-- 　パスワード　-->
+<tr>
 <th>{{ Form::label('password') }}</th>
-<tr><td>{{ Form::password('upPassword',null,['class' => 'form-control','id' => 'inputPassword','placeholder' => 'パスワード'])}}</td></tr>
+<td>{{ Form::password('upPassword',['class' => 'input-profile','id' => 'inputPassword',]) }}</td>
 @if ($errors->has('upPassword'))
 <p class='error-string'>{{ $errors->first('upPassword') }}</p>
  @endif
-
-<!-- 　パスワード確認用　-->
+</tr>
 <th>{{ Form::label('password_confirm') }}</th>
-<tr><td>{{ Form::password('upPassword_confirmation',null,['class' => 'form-control','id' => 'inputPassword','placeholder' => 'パスワード'])}}</td></tr>
+<td>{{ Form::password('upPassword_confirmation',['class' => 'input-profile','id' => 'inputPassword',]) }}</td>
+</tr>
 
-<!-- 　自己紹介　-->
-<th>{{ Form::label('自己紹介') }}</th>
-<tr><td>{{ Form::textarea('upBio',Auth::user()->bio,['class' => 'textarea']) }}</td></tr>
+<th>{{ Form::label('bio') }}</th>
+<td>{{ Form::text('upBio',Auth::user()->bio,['class' => 'input-profile']) }}</td>
+<tr></tr>
+
+<th>{{ Form::label('profile image') }}</th>
+<td>{!! Form::file('upimages',['class' => 'input-profile']) !!}</td>
+<tr></tr>
 
 
-</table>
-<div>
 
-        <th>{{ Form::label('profile image') }}</th>
-       <tr><td> {{Form::file("profile_image")}}</td></tr>
 
-     <tr><td>   <input type="hidden" name="id" value="{{ $user->id }}">
+<td class = "hidden">{{ Form::text('upimages',Auth::user()->images,['class' => 'input']) }}
+</td>
 
-         <button class="user-btn">ユーザー登録内容の編集</button></tr></td>
+<td><input type="hidden" name="id" value="{{ $user->id }}">
+ <button class="btn-unfollow">更新</button>
 
-</div>
+</td>
  {!! Form::close() !!}
-
+</table>
+ </div>
 @endsection

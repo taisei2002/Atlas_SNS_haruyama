@@ -23,54 +23,77 @@
     <!--OGPタグ/twitterカード-->
 </head>
 <body>
-    <header>
-        <div id = "head">
-        <h1 class= "users"><a href="/top" ><img src="images/atlas.png"widht="0" height="50"></a></h1>
-            <div id="User">
-                <div id="User-icon">
-                    <p>{{ Auth::user()->username }}さん<a href="/profile" ><img src="images/icon1.png" widht="0" height="50"></p>
-                <div>
-                    <a></a>
-<button type="button" class="menu-btn">
-  <span class="inn"></span>
-</button>
 
-              <ul>
-	<li class="block">
-		<input type="checkbox" name="item" id="item1" />
-		<label for="item1"><i aria-hidden="true" class="icon-users"></i>menu</label>
-		<ul class="options">
-			<li><a href="/top"><i aria-hidden="true" class="icon-search"></i> HOME</a></li>
-			<li><a href="/profile"><i aria-hidden="true" class="icon-point-right"></i> プロフィール編集</a></li>
+<header>
 
-			<li><a href="/logout"><i aria-hidden="true" class="icon-fire"></i>ログアウト</a></li>
-		</ul>
-	</li>
-            </div>
-        </div>
+<div class = "head">
+      <div class = "Atlas_icon">
+
+  <a href="/top" ><img src="{{ asset('images/atlas.png') }}" widht="40" height="40"></a></div>
+      <div class ="User_icon" href="/profile" >
+
+
+
+        <ul class="accordion-menu">
+
+            <div id="accordion" class="accordion-container">
+
+         <li>
+            <div class="accordion-title js-accordion-title"><i class="" aria-hidden="true"></i>
+                 <i class="" aria-hidden="true"></i>
+                     <p class ="font-color-white">{{ Auth::user()->username }}　さん　　　</p>
+                        <img src="{{ asset('/storage/images/'.Auth::user()->images) }}" class="rounded-circle" width="60" height="60">
+           </div>
+           
+           <ul class="submenuItems">
+               <li><a href="/top"><i aria-hidden="true" class="icon-search"></i> HOME</a></li>
+               <li><a href="/profile"><i aria-hidden="true" class="icon-point-right"></i> プロフィール編集</a></li>
+	           <li><a href="/logout"><i aria-hidden="true" class="icon-fire"></i>ログアウト</a></li>
+          </ul>
+          </li>
+        </ul>
+         </div>
+      </div>
+      </div>
+</div>
+
     </header>
+
+
     <div id="row">
+
         <div id="container">
             @yield('content')
         </div >
 
         <div id="side-bar">
-            <div id="confirm">
-                <p>{{ Auth::user()->username }}さんの</p>
-                <div>
-                <p>フォロー数</p>
-                <p>{{ Auth::user()->follows()->get()->count() }}名</p>
-                </div>
-                <p class="btn"><a href="/follow-list">フォローリスト</a></p>
-                <div>
-                <p>フォロワー数</p>
-                <p>{{ Auth::user()->followUsers()->get()->count() }}名</p>
-                </div>
-                <p class="btn"><a href="/follower-list">フォロワーリスト</a></p>
+
+             <div id="confirm">
+                <br>
+                <p >　{{ Auth::user()->username }}さんの</p>
+                　フォロー数　
+                <p class = "follows-count">{{ Auth::user()->follows()->get()->count() }}人</p>
+
+        <div class = "follow-list-btn-position">
+            <div class="follow-list-btn">
+                <a style="color:white" href="/follow-list">フォローリスト</a>
             </div>
-            <p class="btn"><a href="/search">ユーザー検索</a></p>
         </div>
-    </div>
+              　フォロワー数
+                <p class = "follows-count">{{ Auth::user()->followUsers()->get()->count() }}人</p>
+        <div class = "follow-list-btn-position">
+            <div class="follow-list-btn">
+                <a style="color:white" href="/follower-list">フォロワーリスト</a>
+            </div>
+        </div>
+  <br>
+    <h1 class =  "follow_border"></h1>
+   <br></br>
+            <div class="search-btn">
+               <a style="color:white" href="/search">ユーザー検索</a>
+            </div>
+</div>
+<div>
     <footer>
     </footer>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

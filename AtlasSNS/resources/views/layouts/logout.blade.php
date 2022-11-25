@@ -21,8 +21,13 @@
 </head>
 <body>
   <header>
-    <h1 class="Atlas-logo"><img src="images/atlas.png"widht="0" height="50"></h1>
+    <div class = "login-logo">
+    <div class="Atlas-logo-login">
+        <img src="images/atlas.png"widht="70" height="70">
+</div>
     <p class="sub-title">Social Network Service</p>
+
+</div>
   </header>
   <div id="container">
     @yield('content')

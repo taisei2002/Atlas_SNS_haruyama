@@ -1,4 +1,3 @@
-
 @extends('layouts.logout')
 <div class='letter'>
 @section('content')
@@ -7,16 +6,21 @@
 
 <div class="background_box-login">
 
-<p>AtlasSNSへようこそ</p>
+<p class = "logion-a">AtlasSNSへようこそ</p>
+<div class = "login-b">
+    {{ Form::label('mail address',null,['class' => 'login-label']) }}
+    {{ Form::text('mail',null,['class' => 'input-login']) }}
+</div>
 
-{{ Form::label('e-mail') }}
-{{ Form::text('mail',null,['class' => 'input']) }}
-{{ Form::label('password') }}
-{{ Form::password('password',['class' => 'input']) }}
+<div class = "login-c">
+    {{ Form::label('password',null,['class' => 'login-label']) }}
+    {{ Form::password('password',['class' => 'input-login']) }}
 
-{{ Form::submit('ログイン',['class'=>'login-button'])  }}
+    {{ Form::submit ('LOGIN',['class'=>'login-button'])  }}
+</div>
 
-<p><a class="register" href="/register">新規ユーザーの方はこちら</a></p>
+    <a class="login-register" href="/register">新規ユーザーの方はこちら</a>
+
 </div>
 </div>
 
