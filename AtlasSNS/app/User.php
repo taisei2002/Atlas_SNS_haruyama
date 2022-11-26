@@ -30,10 +30,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-      public function users() {
-        //1対多の「１」側なので単数系
-    return $this->belongsTo('App\Post');
-    }
+
+        public function posts() { //1対多の「多」側なので複数形
+        return $this->hasMany('App\Post');
+        }
 
     // フォロワー→フォロー
     public function  follows()
@@ -85,7 +85,7 @@ class User extends Authenticatable
     {
         return (boolean) $this->followers()->where('following_id', $user_id)->first(['following_id']);
     }
-
+//Userphp
         public function getTimeLines(Int $user_id)
     {
         return $this->where('user_id', $user_id)->orderBy('created_at', 'DESC');

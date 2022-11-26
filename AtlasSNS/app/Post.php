@@ -8,11 +8,11 @@ class Post extends Model
 {
 
    protected $fillable = ['id','user_id', 'post'];
-    //
-      public function post() {
-        //1対多の「多」側なので複数形
-        return $this->hasMany('App\User');
-        }
+
+
+    public function user() { //1対多の「１」側なので単数系
+        return $this->belongsTo('App\User');
+     }
 
 public function getTimeLines(Int $user_id)
     {
