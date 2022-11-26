@@ -31,20 +31,15 @@
 
   <a href="/top" ><img src="{{ asset('images/atlas.png') }}" widht="40" height="40"></a></div>
       <div class ="User_icon" href="/profile" >
-
-
-
         <ul class="accordion-menu">
-
             <div id="accordion" class="accordion-container">
-
          <li>
             <div class="accordion-title js-accordion-title"><i class="" aria-hidden="true"></i>
                  <i class="" aria-hidden="true"></i>
-                     <p class ="font-color-white">{{ Auth::user()->username }}さん</p>
-                        <img src="{{ asset('/storage/images/'.Auth::user()->images) }}" class="rounded-circle" width="60" height="60">
-       </div>
-
+                     <p class ="font-color-white">{{ Auth::user()->username }}　さん　　　</p>
+                     <a class = "head-icon">
+                        <img src="{{ asset('/storage/images/'.Auth::user()->images) }}" class="rounded-circle" width="60" height="60"></a>
+           </div>
            <ul class="submenuItems">
                <li><a href="/top"><i aria-hidden="true" class="icon-search"></i> HOME</a></li>
                <li><a href="/profile"><i aria-hidden="true" class="icon-point-right"></i> プロフィール編集</a></li>
@@ -54,7 +49,7 @@
         </ul>
          </div>
       </div>
-      </div>
+   </div>
 </div>
 
     </header>
@@ -71,7 +66,7 @@
              <div id="confirm">
                 <br>
                 <p >　{{ Auth::user()->username }}さんの</p>
-                　フォロー数
+                　フォロー数　
                 <p class = "follows-count">{{ Auth::user()->follows()->get()->count() }}人</p>
 
         <div class = "follow-list-btn-position">
