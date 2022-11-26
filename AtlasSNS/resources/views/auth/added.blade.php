@@ -4,7 +4,7 @@
 <div class="background_box-register">
 <div id="clear">
    <div class = "login-d">
-  <p>初見さん</p>
+  <p>{{ $user->username}}さん</p>
   <p>ようこそ！AtlasSNSへ！</p>
 </div>
 <div class = "login-e">

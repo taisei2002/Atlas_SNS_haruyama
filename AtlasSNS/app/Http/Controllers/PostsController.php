@@ -27,6 +27,17 @@ public function create(Request $request)
  $post = $request->input('newPost');
  $user_id = Auth::id();//ログインユーザー認証
 
+$this->validate($request, [
+
+        'newPost' => ['required', 'string','max:150'],
+        ], [
+        'newPost.required' => 'ツイートは入力必須です。',
+        'newPost.max' => '文字上限は150以下です。'
+    ]);
+
+
+
+
  \DB::table('posts')->insert([
  'post' => $post,
  'user_id' => $user_id
@@ -48,6 +59,14 @@ public function delete($id)
 //更新機能
 public function update(Request $request)
 {
+
+    $this->validate($request, [
+
+        'upPost' => ['required', 'string','max:150'],
+        ], [
+        'upPost.required' => 'ツイートは入力必須です。',
+        'upPost.max' => '文字上限は150以下です。'
+    ]);
 
  $user_id = Auth::id();
  $id = $request->input('id');

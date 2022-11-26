@@ -26,7 +26,7 @@
 <!-- パスワード -->
 <div class = "login-c">
 {{ Form::label('password',null,['class' => 'login-label']) }}
-{{ Form::text('password',null,['class' => 'input-login']) }}
+{{ Form::password('password',['class' => 'input-login']) }}
 @if ($errors->has('password'))
 <p class='error-string'>{{ $errors->first('password') }}</p>
  @endif
@@ -34,7 +34,7 @@
 <!-- パスワード確認用 -->
 <div class = "login-c">
 {{ Form::label('password confirm',null,['class' => 'login-label']) }}
-{{ Form::text('password_confirm',null,['class' => 'input-login']) }}
+{{ Form::password('password_confirm',['class' => 'input-login']) }}
 @if ($errors->has('password_confirm'))
 <p class='error-string'>{{ $errors->first('password_confirm') }}</p>
  @endif

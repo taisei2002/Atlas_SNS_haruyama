@@ -42,6 +42,11 @@ display: inline;
 color: white;
 font-size: larger;
 font-weight: bold;
+margin-right: 100px;
+}
+
+.head-icon{
+margin-left:0px;
 }
 
 
@@ -65,6 +70,7 @@ font-weight: bold;
 .tweet_form{
 outline: none;
 border: none;
+resize: none;
 width: 1000px;
 
 }
@@ -95,14 +101,15 @@ position: relative;
     display: block;
     position: relative;
     background: #286AC9;
-    height: 70px;
+    height: 78px;
+    margin-top: 22px;
 }
 
 .accordion-title:after {
     content: "";
     position: absolute;
     right: 140px;
-    top: 30%;
+    top: 25%;
     transition: all 0.2s ease-in-out;
     display: block;
     width: 15px;
@@ -116,7 +123,7 @@ position: relative;
 .accordion-title.open:after {
     -webkit-transform: rotate(-45deg);
     transform: rotate(-45deg);
-    top: 45%;
+    top: 35%;
 }
 
 ul {

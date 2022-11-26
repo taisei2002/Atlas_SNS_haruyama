@@ -8,7 +8,10 @@
       <div class="form-group">
   <!--投稿フォーム-->
  {!! Form::open(['url' => '/post']) !!}
-      {!! Form::input('text', 'newPost', null, ['required', 'class' => 'tweet_form', 'placeholder' => '投稿内容を入力してください']) !!}
+{{Form::textarea('newPost', null, ['class' => 'tweet_form' ,'placeholder' => '投稿内容を入力してください', 'rows' => '3'])}}
+            @if ($errors->has('newPost'))
+<p class='error-string'>{{ $errors->first('newPost') }}</p>
+ @endif
   </div>
   </div>
 
@@ -25,7 +28,7 @@
     <span class="left">{{ $post->user->username}}</span>
      <span class="right">{{ $post->created_at}}　　</span>
   </div>
-  <p class="right">{{ $post->post}}</p>
+  <p class="right">{!! nl2br(e($post->post)) !!}</p>
 
   <!-- 投稿の編集ボタン -->
   @if (Auth::user()->id == $post->user_id)
@@ -48,8 +51,12 @@
                 <textarea name="upPost" class="modal_post" ></textarea>
                 <input type="hidden" name="id" class="modal_id" value="">
             <!-- 更新ボタン -->
+                        @if ($errors->has('upPost'))
+<p class='error-string'>{{ $errors->first('upPost') }}</p>
+ @endif
                 <br></br>
                 <input class= "modal_edit" type="image" src="images/edit.png" onclick="return confirm('こちらの投稿で再投稿します。')">
+
            </form>
            <a class="js-modal-close" href=""></a>
         </div>
