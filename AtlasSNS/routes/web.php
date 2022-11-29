@@ -57,9 +57,6 @@ Route::get('/post/{id}/delete','PostsController@delete');
 //編集機能
 Route::get('/post/update/{id}','PostsController@update');
 
-//テストページ
-Route::get('search/follow/test', 'FollowsController@test');
-
 //フォロー・フォロワー機能実装
  Route::post('search/follow/{id}', 'FollowsController@follow');
  Route::delete('search/un_follow/{id}', 'FollowsController@unfollow')->name('unfollow');
