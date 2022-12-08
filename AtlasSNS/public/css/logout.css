@@ -3,13 +3,11 @@
 html {
     height: 100%;
     width: 1500px;
-    overflow-y: scroll;
+
 
 }
 
 body {
-    height: 100%;
-    width: 1500px;
     background: linear-gradient(#186AC9, #2b95ff, #55aaff, #ffff00);
 }
 
@@ -43,6 +41,7 @@ padding: 50;
 }
 .Atlas-logo-login{
 margin-left: 130px;
+padding-top: 10px;
 
 }
 
@@ -66,21 +65,23 @@ margin-left: 130px;
 
 div.background_box {
     /* テキストを配置するための子要素 */
-    width: 347px;
-    height: 633px;
+    padding-right: 29px;
+    padding-left: 8px;
+    padding-bottom: 40px;
     background: rgba(0, 0, 0, 0.2);
     /* #4d0000⇒rgba(77,0,0,0.7)に変更 */
     position: absolute;
     top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border-radius: 10px;
+    border-radius: 15px;
 }
+
 
 .background_box-login {
     /* テキストを配置するための子要素 */
     width: 350px;
-    height: 427px;
+    padding-bottom: 34px;
     background: rgba(0, 0, 0, 0.2);
     /* #4d0000⇒rgba(77,0,0,0.7)に変更 */
     position: absolute;
@@ -100,7 +101,7 @@ div.background_box-register {
     top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border-radius: 10px;
+    border-radius: 15px;
 }
 
 .login-d{
@@ -211,4 +212,9 @@ margin-top: 47px;
 
 .login-c{
   margin-top: 38px;
+}
+
+.error-string{
+    margin-left: 24px;
+    color: #fff;
 }

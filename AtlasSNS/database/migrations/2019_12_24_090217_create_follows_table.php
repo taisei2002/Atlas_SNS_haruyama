@@ -21,10 +21,9 @@ class CreateFollowsTable extends Migration
             $table->timestamp('updated_at')->default(DB::raw('current_timestamp on update current_timestamp'));
 
           // 外部キー制約
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('following_id')->references('id')->on('users')->onDelete('cascade');
+
           // user_idとfollowing_idの組み合わせの重複を許さない
-            $table->unique(['user_id', 'following_id']);
+ 
              });
     }
 

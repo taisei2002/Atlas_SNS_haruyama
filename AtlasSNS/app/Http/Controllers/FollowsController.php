@@ -52,8 +52,6 @@ public function timeline() {
         ->orderBy('created_at','desc')
         ->get();
 
-
-
         $images = DB::table('users')->get();
         $images = auth()->user()->followUsers()->get();
 

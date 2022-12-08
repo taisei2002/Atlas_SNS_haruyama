@@ -50,17 +50,33 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'username' => 'required|string|max:255',
-            'mail' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:4|',
+            'username' => 'required|string|min:2|max:12',
+            'mail' => 'required|string|email|min:5|max:40|unique:users',
+            'password' =>  'required|string|confirmed|alpha_dash|min:8|max:20|',
+            'password_confirmation' => 'required|string|alpha_dash|min:8|max:20|',
 
         ],[
-            'username.required' => '名前を入力してください。',
-            'mail.required' => 'メールアドレスは必須です。',
+            /*名前*/
+            'username.required' => '名前は入力必須です',
+            'username.max' =>'名前は2文字以上、12文字以内です',
+            'username.min'=>'名前は2文字以上、12文字以内です',
+            /*メールアドレス*/
+            'mail.required' => 'メールアドレスは入力必須です。',
+            'mail.max' => 'メールアドレスは5文字以上、40文字以内です',
+            'mail.min' => 'メールアドレスは5文字以上、40文字以内です',
             'mail.email' => 'メールアドレスの形式ではありません',
-            'password.required' => 'パスワードは必須です。',
-
-
+            'mail.unique' => 'このメールアドレスは既に登録されています',
+            /*パスワード*/
+            'password.required' => 'パスワードは入力必須です',
+            'password.min' => 'パスワードは8文字以上、20文字以内です',
+            'password.max' => 'パスワードは8文字以上、20文字以内です',
+            'password.alpha_dash' => 'パスワードは英数字入力のみです',
+            'password.confirmed' =>'パスワードが一致しません',
+              /*パスワード再入力*/
+            'password_confirmation.required' => 'パスワード確認用は入力必須です',
+            'password_confirmation.min' => 'パスワードは8文字以上、20文字以内です',
+            'password_confirmation.max' => 'パスワードは8文字以上、20文字以内です',
+            'password_confirmation.alpha_dash' => 'パスワードは英数字入力のみです',
 ]);
 
     }
@@ -78,6 +94,8 @@ class RegisterController extends Controller
             'username' => $data['username'],
             'mail' => $data['mail'],
             'password' => bcrypt($data['password']),
+            'password_confirmation' => bcrypt($data['password_confirmation']),
+
 
         ]);
 

@@ -15,6 +15,7 @@
 <p class='error-string'>{{ $errors->first('username') }}</p>
  @endif
 </div>
+
 <!-- メールアドレス -->
 <div class = "login-c">
 {{ Form::label('mail address',null,['class' => 'login-label']) }}
@@ -33,10 +34,10 @@
  </div>
 <!-- パスワード確認用 -->
 <div class = "login-c">
-{{ Form::label('password confirm',null,['class' => 'login-label']) }}
-{{ Form::password('password_confirm',['class' => 'input-login']) }}
-@if ($errors->has('password_confirm'))
-<p class='error-string'>{{ $errors->first('password_confirm') }}</p>
+{{ Form::label('password_confirm',null,['class' => 'login-label']) }}
+{{ Form::password('password_confirmation',['class' => 'input-login']) }}
+@if ($errors->has('password_confirmation'))
+<p class='error-string'>{{ $errors->first('password_confirmation') }}</p>
  @endif
 
 </div>

@@ -206,7 +206,12 @@ justify-content: space-between;
         background-color: #005FFF;
         border-radius: 7px;
         margin-top: auto;
+
 }
+a:hover {
+    text-decoration: none;
+}
+
 .follow-list-btn-position{
     text-align: right;
         display: block;
@@ -353,7 +358,7 @@ margin-top: 5px;
 }
 
 .modal__bg {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.2);
     height: 100vh;
     position: absolute;
     width: 100%;
